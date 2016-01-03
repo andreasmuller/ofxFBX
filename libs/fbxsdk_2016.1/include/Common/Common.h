@@ -26,7 +26,7 @@ void InitializeSdkObjects(FbxManager*& pManager, FbxScene*& pScene)
         FBXSDK_printf("Error: Unable to create FBX Manager!\n");
         exit(1);
     }
-	else FBXSDK_printf("Autodesk FBX SDK version %s\n", pManager->GetVersion());
+//	else FBXSDK_printf("Autodesk FBX SDK version %s\n", pManager->GetVersion());
     
 	//Create an IOSettings object. This object holds all import/export settings.
 	FbxIOSettings* ios = FbxIOSettings::Create(pManager, IOSROOT);
@@ -147,23 +147,24 @@ bool LoadScene(FbxManager* pManager, FbxDocument* pScene, const char* pFilename)
         return false;
     }
     
-    FBXSDK_printf("FBX file format version for this FBX SDK is %d.%d.%d\n", lSDKMajor, lSDKMinor, lSDKRevision);
+//    FBXSDK_printf("FBX file format version for this FBX SDK is %d.%d.%d\n", lSDKMajor, lSDKMinor, lSDKRevision);
     
     if (lImporter->IsFBX())
     {
-        FBXSDK_printf("FBX file format version for file '%s' is %d.%d.%d\n\n", pFilename, lFileMajor, lFileMinor, lFileRevision);
+//        FBXSDK_printf("FBX file format version for file '%s' is %d.%d.%d\n\n", pFilename, lFileMajor, lFileMinor, lFileRevision);
         
         // From this point, it is possible to access animation stack information without
         // the expense of loading the entire file.
         
-        FBXSDK_printf("Animation Stack Information\n");
+//        FBXSDK_printf("Animation Stack Information\n");
         
         lAnimStackCount = lImporter->GetAnimStackCount();
         
-        FBXSDK_printf("    Number of Animation Stacks: %d\n", lAnimStackCount);
-        FBXSDK_printf("    Current Animation Stack: \"%s\"\n", lImporter->GetActiveAnimStackName().Buffer());
-        FBXSDK_printf("\n");
+//        FBXSDK_printf("    Number of Animation Stacks: %d\n", lAnimStackCount);
+//        FBXSDK_printf("    Current Animation Stack: \"%s\"\n", lImporter->GetActiveAnimStackName().Buffer());
+//        FBXSDK_printf("\n");
         
+/*
         for(i = 0; i < lAnimStackCount; i++)
         {
             FbxTakeInfo* lTakeInfo = lImporter->GetTakeInfo(i);
@@ -181,7 +182,8 @@ bool LoadScene(FbxManager* pManager, FbxDocument* pScene, const char* pFilename)
             FBXSDK_printf("         Import State: %s\n", lTakeInfo->mSelect ? "true" : "false");
             FBXSDK_printf("\n");
         }
-        
+*/
+
         // Set the import states. By default, the import states are always set to
         // true. The code below shows how to change these states.
         IOS_REF.SetBoolProp(IMP_FBX_MATERIAL,        true);

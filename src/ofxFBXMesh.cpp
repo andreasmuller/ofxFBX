@@ -167,9 +167,9 @@ void ofxFBXMesh::setFBXMesh( FbxMesh* lMesh ) {
         // normals
         if(bHasNormals) {
             ofMesh normalsMesh;
-            cout << "ofxFBXMesh :: we have normals for " << getName() << endl;
+            ofLogNotice() << "ofxFBXMesh :: we have normals for " << getName();
             if(bMapNormalsByControlPoint) {
-                cout << "ofxFBXMesh :: normals by control point for " << getName() << endl;
+                ofLogNotice() << "ofxFBXMesh :: normals by control point for " << getName();
                 const FbxGeometryElementNormal * lNormalElement = lMesh->GetElementNormal(0);
                 for(int i = 0; i < lMesh->GetControlPointsCount(); i++ ) {
                     int lNormalIndex = i;
@@ -185,9 +185,9 @@ void ofxFBXMesh::setFBXMesh( FbxMesh* lMesh ) {
         
         // textures //
         if(bHasUvs) {
-            cout << "ofxFBXMesh :: we have tex coords for " << getName() << endl;
+            ofLogNotice() << "ofxFBXMesh :: we have tex coords for " << getName();
             if(bMapUvsByControlPoint) {
-                cout << "ofxFBXMesh :: tex coords by control point " << getName() << endl;
+                ofLogNotice() << "ofxFBXMesh :: tex coords by control point " << getName();
                 const FbxGeometryElementUV * lUVElement = lMesh->GetElementUV(0);
                 for(int i = 0; i < lMesh->GetControlPointsCount(); i++ ) {
                     int lUVIndex = i;
@@ -1107,7 +1107,3 @@ void ofxFBXMesh::populateNormals( FbxVector4* pNormalsArray ) {
         }//end eByPolygonVertex
     }//end if lNormalElement
 }
-
-
-
-

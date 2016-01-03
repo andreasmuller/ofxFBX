@@ -113,6 +113,8 @@ private:
     FbxAnimLayer* currentFbxAnimationLayer;
     
     ofxFBXSceneSettings _settings;
+
+	FbxTime::EMode	desiredTimeMode;
 };
 
 

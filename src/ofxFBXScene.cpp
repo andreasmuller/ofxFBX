@@ -15,6 +15,7 @@ ofxFBXScene::ofxFBXScene() {
     lScene      = NULL;
     currentFbxAnimationLayer = NULL;
     fbxFilePath = "";
+	desiredTimeMode = FbxTime::EMode::eFrames60;
 }
 
 //--------------------------------------------------------------
@@ -35,6 +36,7 @@ ofxFBXScene::~ofxFBXScene() {
 bool ofxFBXScene::load( string path, ofxFBXSceneSettings aSettings ) {
     bool lResult;
     
+
 	// Prepare the FBX SDK.
 	InitializeSdkObjects(lSdkManager, lScene);
     
@@ -62,6 +64,9 @@ bool ofxFBXScene::load( string path, ofxFBXSceneSettings aSettings ) {
         return false;
 	}
     
+	//lScene->GetGlobalSettings().SetTimeMode(FbxTime::EMode::eFrames60);
+	//lScene->GetGlobalSettings().SetTimeMode(FbxTime::EMode::eFrames30);
+
     fbxFilePath = ofToDataPath(path);
     
     // Convert Axis System to what is used in this example, if needed
@@ -100,11 +105,11 @@ bool ofxFBXScene::load( string path, ofxFBXSceneSettings aSettings ) {
 //    lScene->GetGlobalSettings().SetTimeMode( FbxTime::eCustom );
 //    lScene->GetGlobalSettings().SetTimeMode( FbxTime::eCustom );
     // Initialize the frame period.
-    fbxFrameTime.SetTime(0, 0, 0, 1, 0, lScene->GetGlobalSettings().GetTimeMode());
+//    fbxFrameTime.SetTime(0, 0, 0, 1, 0, lScene->GetGlobalSettings().GetTimeMode());
 //    fbxFrameTime.Set( lScene->GetGlobalSettings().GetFrameRate() );
-//    fbxFrameTime.SetTime(0, 0, 0, 1, 0, FbxTime::eFrames24 );
-//    fbxFrameTime.SetSecondDouble( 1.f / 24.f );
-    cout << "time mode: " << lScene->GetGlobalSettings().GetTimeMode() << endl;
+    fbxFrameTime.SetTime(0, 0, 0, 1, 0, desiredTimeMode );
+//    fbxFrameTime.SetSecondDouble( 1.f / 60.f );
+    ofLogNotice() << "time mode: " << lScene->GetGlobalSettings().GetTimeMode();
     
     // Get the list of all the animation stack.
     if( areAnimationsEnabled() ) {
@@ -114,7 +119,7 @@ bool ofxFBXScene::load( string path, ofxFBXSceneSettings aSettings ) {
     if(animations.size() > 0) {
         FbxAnimStack * lCurrentAnimationStack = lScene->FindMember<FbxAnimStack>( (&animations[0].fbxname)->Buffer());
         if (lCurrentAnimationStack == NULL) {
-            cout << "this is a problem. The anim stack should be found in the scene!" << endl;
+            ofLogError() << "this is a problem. The anim stack should be found in the scene!";
             // this is a problem. The anim stack should be found in the scene!
             return false;
         }

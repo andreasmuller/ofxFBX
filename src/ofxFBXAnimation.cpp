@@ -169,7 +169,9 @@ unsigned int ofxFBXAnimation::getPositionMillis() {
 
 //--------------------------------------------------------------
 int ofxFBXAnimation::getFrameNum() {
-    return round(getPosition() * (float)getTotalNumFrames());
+	float tmpFrame = getPosition() * (float)getTotalNumFrames();
+	float roundedFrameNum = (tmpFrame > 0.0) ? floor(tmpFrame + 0.5) : ceil(tmpFrame - 0.5); // All this ro replace round() which doesn't exist in VS math.h
+    return roundedFrameNum;
 }
 
 //--------------------------------------------------------------
