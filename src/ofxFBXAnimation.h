@@ -33,6 +33,8 @@ public:
     void setSpeed( float aSpeed );
     float getSpeed();
     
+	void flagFrameAsNew();
+
     void play();
     void stop();
     void pause();

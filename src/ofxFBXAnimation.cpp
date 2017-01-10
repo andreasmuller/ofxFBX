@@ -90,6 +90,12 @@ bool ofxFBXAnimation::isFrameNew() {
 }
 
 //--------------------------------------------------------------
+void ofxFBXAnimation::flagFrameAsNew()
+{
+	bNewFrame = true;
+}
+
+//--------------------------------------------------------------
 void ofxFBXAnimation::setSpeed( float aSpeed ) {
     _speed = aSpeed;
 }
