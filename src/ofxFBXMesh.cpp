@@ -296,7 +296,6 @@ void ofxFBXMesh::setFBXMesh( FbxMesh* lMesh ) {
             
 //            cout << "materialIndex = " << lMaterialIndex << endl;
         }
-        
     }
     
     // All faces will use the same material.
@@ -309,16 +308,19 @@ void ofxFBXMesh::setFBXMesh( FbxMesh* lMesh ) {
 //    }
     
 //    cout << "--------------------------------------- " << endl << endl;
-    veebs.setMesh( mesh, GL_STREAM_DRAW );
-    original = mesh;
-    
-    if( bHasNormals ) {
-        if(fbxMesh->GetControlPointsCount()) {
-            mNormalsArray = new FbxVector4[ fbxMesh->GetControlPointsCount() ];
-            populateNormals( mNormalsArray );
-        }
-    }
-    
+
+	if (mesh.getNumVertices() > 0)
+	{
+		veebs.setMesh(mesh, GL_STREAM_DRAW);
+		original = mesh;
+
+		if (bHasNormals) {
+			if (fbxMesh->GetControlPointsCount()) {
+				mNormalsArray = new FbxVector4[fbxMesh->GetControlPointsCount()];
+				populateNormals(mNormalsArray);
+			}
+		}
+	}
 }
 
 //--------------------------------------------------------------

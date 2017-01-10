@@ -156,8 +156,10 @@ void ofxFBXBone::pointTo( ofVec3f aTarget, ofVec3f aAxis ) {
 bool ofxFBXBone::isLimb() {
     FbxSkeleton* lSkeleton = getFbxSkeleton();
     if(lSkeleton) {
-        lSkeleton->GetSkeletonType() == FbxSkeleton::eLimbNode;
-        return true;
+		if (lSkeleton->GetSkeletonType() == FbxSkeleton::eLimbNode)
+		{
+			return true;
+		}
     }
     return false;
 }
